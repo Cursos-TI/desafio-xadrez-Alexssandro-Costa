@@ -2,70 +2,100 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+// Implementação de Movimentação do Bispo
+void movimentacao_bispo(int casas)
+{
+    if(casas > 0)
+    {
+        for (int i = 0; i < 1; i++)
+        { 
+            puts("Cima");
+            for(int j = 0; j < 1 ; j++)
+            {
+                puts("direita");
+            } 
+        }
+        movimentacao_bispo(casas-1); // chamada a recursão
+        
+    }
+
+}
+
+// Implementação de Movimentação da Torre
+void movimentacao_torre(int casas)
+{
+    if(casas > 0)
+    {
+        movimentacao_torre(casas-1); // chamada a recursão
+        puts("direita");
+    }
+}
+
+ // Implementação de Movimentação da Rainha
+void movimentacao_rainha(int casas)
+{
+    if(casas > 0)
+    {
+        movimentacao_rainha(casas-1); // chamada a recursão
+        puts("Esquerda");
+    }
+}
 
 int main() {
     // Nível Novato - Movimentação das Peças
     // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
 
-    int movimento;
+    int movimento = 0;   // variavel que contem quantas casas que as peças irão se mover
+    char validacao;
     do
     {
-        puts("Deseja mover a peça em quantas casas:"); 
-        scanf(" %i", &movimento); // determina quantas casas a peça irá se mover
+        puts("Deseja mover as peça em quantas casas?\n escolha de 1 a 9:"); 
+        scanf(" %s", &validacao); // determina quantas casas a peça irá se mover
 
-        if(movimento <= 0)
+        // verifica se oque foi inserido é um digito 
+        if(isdigit(validacao))
         {
-            puts("Digite um numero positivo maior que 1\n");
+            if((validacao - '0') < 10 )
+            {
+                movimento =  validacao - '0';
+                break;
+            }
         }
-
-    }while(movimento <= 0);
+        puts("Digite um numero inteiro de 1 a 9\n");
     
-    // Implementação de Movimentação do Bispo
+    }while(movimento <= 0 || movimento > 10);
+    
+    // chamada do procedimento de movimentação do bispo
     puts("Movimentação do Bispo");
-    for(int b = 1; b <= movimento; b++)
-    {
-        printf("Bispo se movimentou %i casas em direção a Diagonal superior direita\n", b);
-    }
+    movimentacao_bispo(movimento);
 
-    // Implementação de Movimentação da Torre
+    // chamada do procedimento de movimentação da Torre
     puts("\nMovimentação da Torre");
-    for(int t = 1; t <= movimento; t++)
-    {
-        printf("Torre se movimentou %i casas pra direita\n", t);
-    }
+    movimentacao_torre(movimento);
 
-    // Implementação de Movimentação da Rainha
+    // chamada do procedimento de movimentação da Rainha
     puts("\nMovimentação da Rainha");
-    for(int r = 1; r <= movimento; r++)
-    {
-        printf("Rainha se movimentou %i casas pra esquerda\n", r);
-    }
+    movimentacao_rainha(movimento);
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
+    // implementação da movimentação do cavalo
     puts("\nMovimentação do Cavalo");
-    while (movimento > 0)
-    { 
-        for(int c = 1; c <= 2; c++)
+    int aux = 1;  
+    while(aux <= movimento)
+    {
+        printf("\n%i° movimento\n", aux);
+        // declara duas variaveis
+        for(int i = 0, j = 1; i <= 2; i++)
         {
-            printf("Cavalo se movimentou %i casas pra cima\n", c);
+            // verifica se i é maior que j, se for, mostra a string e sai do loop
+            if(i > j)
+            {
+                puts("direita");
+                break;
+            }
+            puts("cima"); // mostra essa string se i não for maior que j
         }
-        puts("Cavalo se movimentou uma casa pra direita\n");
-        movimento--;
+        aux ++;
     }
-    
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
 
     return 0;
 }

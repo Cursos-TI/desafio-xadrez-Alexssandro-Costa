@@ -64,8 +64,8 @@ Para o desafio final, as peças que utilizam loops simples terão seus códigos 
 
 **Movimentação das Peças:**
 
-**Bispo**: 5 casas na diagonal direita para cima
 **Torre**: 5 casas para a direita
+**Bispo**: 5 casas na diagonal direita para cima
 **Rainha**: 8 casas para a esquerda
 **Cavalo**: 1 vez em L para cima à direita
 Obs: É obrigatório o uso de loops aninhados na movimentação do bispo e funções recursivas.
